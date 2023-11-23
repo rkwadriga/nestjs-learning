@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: ./.docker/backend/Dockerfile
+        volumes:
+            - ./:/var/www/
+        ports:
+            - 5453:5454
+        # tty: true
+        # command: sh -c "npm run build && npm run start:pm2-runtime"
+    mongo:
+        image: mongo
+        environment:
+            MONGO_INITDB_DATABASE: top_api_db
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+        volumes:
+            - ./.docker/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - ./.docker/mongo/data/db:/data/db
+        ports:
+            - 27018:27017
+    redis:
+        image: redis:7.2.3-alpine3.18
+        ports:
+            - 6382:6379
+        command: redis-server
