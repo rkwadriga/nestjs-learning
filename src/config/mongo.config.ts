@@ -8,14 +8,7 @@ export const getMongoConfig = async (configService: ConfigService): Promise<Type
   const pass = configService.get('MONGO_DB_PASSWORD');
   const dbname = configService.get('MONGO_DB_DBNAME');
 
-  console.log(`mongodb://${user}:${pass}@${host}:${port}/${dbname}`);
-
   return {
     uri: `mongodb://${user}:${pass}@${host}:${port}/${dbname}`,
-    ...{
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    }
   };
 }
