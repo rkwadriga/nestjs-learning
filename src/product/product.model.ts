@@ -1,4 +1,5 @@
 export class ProductModel {
+  public _id?: string;
   public image?: string;
   public title?: string;
   public price?: number;
