@@ -1,15 +1,5 @@
 version: "3.7"
 services:
-    backend:
-        build:
-            context: .
-            dockerfile: ./.docker/backend/Dockerfile
-        volumes:
-            - ./:/var/www/
-        ports:
-            - 5453:5454
-        # tty: true
-        # command: sh -c "npm run build && npm run start:pm2-runtime"
     mongo:
         image: mongo
         environment:
