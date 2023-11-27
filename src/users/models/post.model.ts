@@ -14,7 +14,7 @@ export class Post {
   public text?: string;
 
   @Prop({ type: MSchema.Types.ObjectId, ref: User.name })
-  author: User;
+  author?: User;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);
