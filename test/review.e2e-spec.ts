@@ -13,6 +13,7 @@ const testDto: CreateReviewDto = {
   name: 'Test Review',
   title: 'Test Review Title',
   description: 'Test Review Description',
+  rating: 3,
   productId,
 };
 
@@ -39,6 +40,17 @@ describe('AppController (e2e)', () => {
         expect(createdId).toBeDefined();
       })
     ;
+  });
+
+  it('/review/create (POST) - fail', async () => {
+    return request(app.getHttpServer())
+      .post('/review/create')
+      .send({ ...testDto, rating: 0 })
+      .expect(HttpStatus.BAD_REQUEST)
+      .then(({ body }: request.Response) => {
+        expect(body.message[0]).toBe('Rating can not be less than 1');
+      })
+      ;
   });
 
   it(`/review/byProduct/:productId (GET) - failed`, async () => {
